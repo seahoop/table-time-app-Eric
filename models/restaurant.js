@@ -27,10 +27,11 @@ const restaurantSchema = new Schema({
     },
     reservations: [
         {
-            type: Mongoose.Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'reservations'
         }
     ]
 })
 
-export const Restaurant = model('Restaurant', restaurantSchema)
+ const Restaurant = model('Restaurant', restaurantSchema)
+ export default Restaurant
