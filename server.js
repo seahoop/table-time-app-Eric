@@ -14,7 +14,7 @@ import restRouter from "./controllers/restaurant.js"
 
 // adminRouter below
 import adminAuthRouter from './controllers/adminAuth.js';  // Correct import
-import adminProfileRouter from './controllers/adminProfile'
+import adminProfileRouter from './controllers/adminProfile.js'
 
 const PORT = 3000
 app.use(cors());

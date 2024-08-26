@@ -15,4 +15,4 @@ function verifyToken(req, res, next) {
   }
   
   // We'll need to export this function so that we can use it in our controllers file
-  export default router;
+  export default verifyToken;
