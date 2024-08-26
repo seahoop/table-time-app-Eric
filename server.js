@@ -9,6 +9,7 @@ import restControllers from "./controllers/restaurant.js"
 
 const PORT = 3000
 
+
 app.use("/restaurants", restControllers)
 
 db.on("connected", () => {
