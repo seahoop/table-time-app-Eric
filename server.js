@@ -5,12 +5,26 @@ import express from "express"
 const app = express()
 import chalk from "chalk";
 import cors from "cors"
-import restControllers from "./controllers/restaurant.js"
+
+// customerRouter below
+import customerRouter from "./controllers/customer.js"
+
+// restaurantRouter below
+
+
+// adminRouter below
+
 
 const PORT = 3000
 
+// customer middleware below
+app.use("/customers", customerRouter)
 
-app.use("/restaurants", restControllers)
+// restaurant middleware below
+
+
+// admin middleware below
+
 
 db.on("connected", () => {
     console.clear();
