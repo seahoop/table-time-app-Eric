@@ -1,18 +1,18 @@
 import dotenv from "dotenv"
 dotenv.config()
+import db from "./db/connection.js";
 import express from "express"
 const app = express()
-import mongoose from "mongoose"
+import chalk from "chalk";
 import cors from "cors"
 
 const PORT = 3000
 
-mongoose.connect(process.env.MONGODB_URI)
-
-mongoose.connection.on('connected', () => {
-    console.log(`Connected to MongoDB ${mongoose.connect.name}`)
-
+db.on("connected", () => {
+    console.clear();
+    console.log(chalk.blue("Connected to MongoDB!"));
+  
     app.listen(PORT, () => {
-        console.log(`Express server ready on PORT: ${PORT}`)
-    })
-})
+      console.log(`Express server running on port: ${PORT}`);
+    });
+  })
