@@ -19,6 +19,14 @@ router.put("/:customerId/restaurant/:restaurantId/reservation/:reservationId/edi
     res.send("This is a customer reservation edit page")
 })
 
+router.put("/:customerId/restaurant/:restaurantId/reservation/:reservationId/edit", async (req, res) => {
+    res.send("This is a customer reservation delete route")
+})
+
+router.post("/:customerId/restaurant/:restaurantId/favorites", async (req, res) => {
+    res.send("This page will add a restaurant to myFavorites")
+})
+
 
 
 
