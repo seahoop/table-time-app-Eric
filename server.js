@@ -10,7 +10,7 @@ import cors from "cors"
 import customerRouter from "./controllers/customer.js"
 
 // restaurantRouter below
-
+import restRouter from "./controllers/restaurant.js"
 
 // adminRouter below
 
@@ -21,7 +21,7 @@ const PORT = 3000
 app.use("/customers", customerRouter)
 
 // restaurant middleware below
-
+app.use("/restaurants", restRouter)
 
 // admin middleware below
 
