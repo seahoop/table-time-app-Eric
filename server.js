@@ -5,8 +5,12 @@ import express from "express"
 const app = express()
 import chalk from "chalk";
 import cors from "cors"
+import customerRouter from "./controllers/customer.js"
 
 const PORT = 3000
+
+app.use("/customers", customerRouter)
+
 
 db.on("connected", () => {
     console.clear();
