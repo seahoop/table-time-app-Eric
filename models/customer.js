@@ -8,7 +8,7 @@ const customerSchema = new Schema({
     password: {
         type: String,
         required: true
-      
+
     },
     myReservations: [
         {
@@ -24,6 +24,7 @@ const customerSchema = new Schema({
     ]
 })
 
+customerSchema.set('toJSON', { transform: (document, returnedObject) => { delete returnedObject.password } })
 
 const Customer = new model('Customer', customerSchema)
 
