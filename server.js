@@ -25,7 +25,7 @@ app.use("/restaurants", restRouter)
 
 // admin middleware below
 
-
+ 
 db.on("connected", () => {
     console.clear();
     console.log(chalk.blue("Connected to MongoDB!"));
