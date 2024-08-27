@@ -29,7 +29,6 @@ router.post('/customers/signup', async (req, res) => {
 router.post('/customers/signin', async (req, res) => {
     try {
         const customer = await Customer.findOne({ username: req.body.username })
-        console.log(customer.password, req.body.password)
         if (customer && bcrypt.compareSync(req.body.password, customer.password)) {
             const token = jwt.sign({ username: customer.username, _id: customer._id }, process.env.JWT_SECRET)
             res.status(200).json({ token })
@@ -61,7 +60,6 @@ router.post('/restaurants/signup', async (req, res) => {
 router.post('/restaurants/signin', async (req, res) => {
     try {
         const restaurant = await Restaurant.findOne({ username: req.body.username })
-        console.log(restaurant.password, req.body.password)
         if (restaurant && bcrypt.compareSync(req.body.password, restaurant.password)) {
             const token = jwt.sign({ username: restaurant.username, _id: restaurant._id }, process.env.JWT_SECRET)
             res.status(200).json({ token })
