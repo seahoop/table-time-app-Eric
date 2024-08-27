@@ -13,9 +13,12 @@ import customerRouter from "./controllers/customer.js"
 import restRouter from "./controllers/restaurant.js"
 
 // adminRouter below
-
+import adminAuthRouter from './controllers/adminAuth.js';  // Correct import
+import adminProfileRouter from './controllers/adminProfile.js'
 
 const PORT = 3000
+app.use(cors());
+app.use(express.json());  // Middleware to parse JSON bodies
 
 // customer middleware below
 app.use("/customers", customerRouter)
@@ -24,7 +27,8 @@ app.use("/customers", customerRouter)
 app.use("/restaurants", restRouter)
 
 // admin middleware below
-
+app.use('/adminAuth', adminAuthRouter);  // Correctly register the route
+app.use('/profiles', adminProfileRouter)
 
 db.on("connected", () => {
     console.clear();
