@@ -33,5 +33,7 @@ const restaurantSchema = new Schema({
     ]
 })
 
- const Restaurant = model('Restaurant', restaurantSchema)
- export default Restaurant
+restaurantSchema.set('toJSON', { transform: (document, returnedObject) => { delete returnedObject.password } })
+
+const Restaurant = model('Restaurant', restaurantSchema)
+export default Restaurant
