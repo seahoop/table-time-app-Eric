@@ -10,7 +10,7 @@ router.get("/:customerId", async (req, res) => {
     const restaurants = await Restaurant.find({})
     res.status(200).json({ customer, restaurants })
 })
-   
+     
 router.get("/:customerId/restaurants/:restaurantId", async (req, res) => {
     const resId = req.params.restaurantId
     const restaurant = await Restaurant.findById(resId)
