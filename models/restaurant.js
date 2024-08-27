@@ -28,7 +28,7 @@ const restaurantSchema = new Schema({
     reservations: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'reservations'
+            ref: 'Reservation'
         }
     ]
 })
