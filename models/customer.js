@@ -13,13 +13,19 @@ const customerSchema = new Schema({
     myReservations: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Reservations"
+            ref: "Reservation"
         }
     ],
     pastReservations: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Past Reservations"
+            ref: "Reservation"
+        }
+    ],
+    favorites: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Restaurant"
         }
     ]
 })
