@@ -6,25 +6,30 @@ const router = express.Router()
 
 router.get("/:customerId", async (req, res) => {
     const id = req.params.customerId
-    const customer = await Customer.findById(id)
-    res.send(` this is the customer ${customer}`)
+    const customer = await Customer.findById(id).populate('favorites').populate('myReservations').populate('pastReservations')
+    const restaurants = await Restaurant.find({})
+    res.status(200).json({ customer, restaurants })
 })
-
-router.get("/:customerId/restaurant/:restaurantId", async (req, res) => {
+   
+router.get("/:customerId/restaurants/:restaurantId", async (req, res) => {
     const resId = req.params.restaurantId
     const restaurant = await Restaurant.findById(resId)
+    res.status(200).json(restaurant)
     res.send(`this is a restaurant page ${restaurant}`)
-})
-
-router.get("/:customerId/favorites", async (req, res) => {
-    res.send("This is a favorites page")
 })
 
 router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId/edit", async (req, res) => {
     const resId = req.params.reservationId
-    const editRes = await Reservation.findByIdAndUpdate(resId, {guests: 22, time: "21:00", date: new Date("2024-12-24")})
+    const newGuests = req.body.guests
+    const newTime = req.body.time
+    const newDate = req.body.date
+    const editRes = await Reservation.findByIdAndUpdate(resId, { guests: newGuests, time: newTime, date: new Date(newDate) })
+    const custId = req.params.customerId
+    const customer = await Customer.findById(custId).populate('myReservations').populate('pastReservations').populate('favorites')
+
+    res.status(200).json(customer)
     res.send(`Here is your new Reservation details ${editRes} `)
-}) 
+})
 
 router.delete("/:customerId/restaurants/:restaurantId/reservations/:reservationId", async (req, res) => {
     const reserveId = req.params.reservationId
@@ -36,15 +41,12 @@ router.delete("/:customerId/restaurants/:restaurantId/reservations/:reservationI
         reserveId !== reservation._id
     })
     cust.myReservations = newReservations
-    cust.save()
+    await cust.save()
+    res.status(200).json(cust)
     res.send(`This is your updated reservation ${cancelReservation}`)
 })
 
-router.post("/:customerId/restaurant/:restaurantId/favorites", async (req, res) => {
-    res.send("This page will add a restaurant to myFavorites")
-})
-
-router.put("/:customerId/restaurants/restaurantId/reservations/:reservationId", async (req, res) => {
+router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId", async (req, res) => {
     const custId = req.params.customerId //found customerId from url
 
     const resId = req.params.reservationId // found reservation from url
@@ -58,7 +60,10 @@ router.put("/:customerId/restaurants/restaurantId/reservations/:reservationId", 
     customer.myReservations.push(resId) // push resId to the customer (used push method because myReservation is an array)
 
     await customer.save()
-    res.send(`These are your new reservations ${ customer}`) 
+    await customer.populate('myReservations'),await customer.populate('favorites'),
+    await customer.populate('pastReservations')
+    res.status(200).json(customer)
+    res.send(`These are your new reservations ${customer}`)
     /* ------------------------------------Issue: Adding reservation twice to my reservations --------------------------------------*/
 })
 
@@ -68,10 +73,12 @@ router.put("/:customerId/restaurants/:restaurantId/favorites", async (req, res) 
     const customer = await Customer.findById(custId)
     customer.favorites.push(restId)
     await customer.save()
+    await customer.populate('favorites')
+    res.status(200).json(customer)
     res.send(`This is your favorite Restaurants ${restId}`)
 })
 
- 
+
 /*-----------------------------------------Issue: make adding a reservation once per restaurantId------------------------------------------*/
 
 
