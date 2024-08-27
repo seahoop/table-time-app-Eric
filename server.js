@@ -8,6 +8,7 @@ import cors from "cors"
 
 // customerRouter below
 import customerRouter from "./controllers/customer.js"
+import authRouter from "./controllers/regularAuth.js"
 
 // restaurantRouter below
 import restRouter from "./controllers/restaurant.js"
@@ -19,6 +20,9 @@ import adminProfileRouter from './controllers/adminProfile.js'
 const PORT = 3000
 app.use(cors());
 app.use(express.json());  // Middleware to parse JSON bodies
+
+// authorization middleware below
+app.use('/auth', authRouter)
 
 // customer middleware below
 app.use("/customers", customerRouter)
