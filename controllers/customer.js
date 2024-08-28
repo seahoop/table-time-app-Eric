@@ -38,7 +38,7 @@ export const cancelReservation = async (req, res) => {
     const custId = req.params.customerId
     const cust = await Customer.findById(custId)
     const newReservations = cust.myReservations.filter((reservation) => {
-        reserveId !== reservation._id
+        return reserveId !== reservation._id.toString()
     })
     cust.myReservations = newReservations
     await cust.save()
