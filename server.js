@@ -8,7 +8,8 @@ import chalk from "chalk";
 import cors from "cors"
 
 // customerRouter below
-import customerRouter from "./controllers/customer.js"
+import customerRouter from "./routes/customer.js"
+import authRouter from "./controllers/regularAuth.js"
 
 // restaurantRouter below
 import restRouter from "./controllers/restaurant.js"
@@ -28,6 +29,9 @@ mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
+// authorization middleware below
+app.use('/auth', authRouter)
 
 // customer middleware below
 app.use("/customers", customerRouter)

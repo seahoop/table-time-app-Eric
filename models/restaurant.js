@@ -11,27 +11,28 @@ const restaurantSchema = new Schema({
     },
     name: {
         type: String,
-        required: true
+        default: "Your Restaurant Name"
     },
     about: {
         type: String,
-        required: true
+        default: "Tell us about your restaurant."
     },
     address: {
         type: String,
-        required: true
+        default: "Restaurant Address goes here."
     },
     image: {
         type: String,
-        required: true
     },
     reservations: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'reservations'
+            ref: 'Reservation'
         }
     ]
 })
 
- const Restaurant = model('Restaurant', restaurantSchema)
- export default Restaurant
+restaurantSchema.set('toJSON', { transform: (document, returnedObject) => { delete returnedObject.password } })
+
+const Restaurant = model('Restaurant', restaurantSchema)
+export default Restaurant

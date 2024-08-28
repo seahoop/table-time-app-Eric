@@ -8,22 +8,29 @@ const customerSchema = new Schema({
     password: {
         type: String,
         required: true
-      
+
     },
     myReservations: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Reservations"
+            ref: "Reservation"
         }
     ],
     pastReservations: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Past Reservations"
+            ref: "Reservation"
+        }
+    ],
+    favorites: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Restaurant"
         }
     ]
 })
 
+customerSchema.set('toJSON', { transform: (document, returnedObject) => { delete returnedObject.password } })
 
 const Customer = new model('Customer', customerSchema)
 
