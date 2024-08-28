@@ -1,16 +1,16 @@
 import express from "express"
 const router = express.Router()
-import Restaurant from "../models/restaurant.js" 
+import Restaurant from "../models/restaurant.js"
 
 router.get("/:restaurantId", async (req, res) => {
-    const id = req.params.restaurantId
-    const restaurant = await Restaurant.findById(id)
-    res.send(`this is the restaurant's information ${restaurant}`)
+    const restaurantId = req.params.restaurantId
+    const restaurant = await Restaurant.findById(restaurantId).populate('reservations')
+    res.status(200).json({ restaurant })
 })
 router.put("/:restaurantId/edit", async (req, res) => {
-    const id = req.params.restaurantId
-    const restaurant = await Restaurant.findByIdAndUpdate(id, { name: "chilis", about: "mid food"})
-    res.send(`edit what the customer sees ${restaurant.name} ${restaurant.about}`)
+    const restaurantId = req.params.restaurantId
+    const restaurant = await Restaurant.findByIdAndUpdate(restaurantId, req.body).populate('reservations')
+    res.status(200).json(restaurant)
 })
 router.post("/:restaurantId/reservations/new", async (req, res) => {
     res.send("add reservation")
