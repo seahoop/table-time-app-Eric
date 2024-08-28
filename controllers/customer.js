@@ -1,24 +1,24 @@
-import express from "express"
+
 import Customer from "../models/customer.js"
 import Restaurant from "../models/restaurant.js"
 import Reservation from "../models/reservation.js"
-const router = express.Router()
 
-router.get("/:customerId", async (req, res) => {
+
+export const showDashboard = async (req, res) => {
     const id = req.params.customerId
     const customer = await Customer.findById(id).populate('favorites').populate('myReservations').populate('pastReservations')
     const restaurants = await Restaurant.find({})
     res.status(200).json({ customer, restaurants })
-})
-     
-router.get("/:customerId/restaurants/:restaurantId", async (req, res) => {
+}
+      
+export const showRestaurant = async (req, res) => {
     const resId = req.params.restaurantId
     const restaurant = await Restaurant.findById(resId)
     res.status(200).json(restaurant)
-    res.send(`this is a restaurant page ${restaurant}`)
-})
+    res.send(`this is a restaurant page ${restaurant}`) 
+}
 
-router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId/edit", async (req, res) => {
+export const editReservation = async (req, res) => {
     const resId = req.params.reservationId
     const newGuests = req.body.guests
     const newTime = req.body.time
@@ -29,9 +29,9 @@ router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId/e
 
     res.status(200).json(customer)
     res.send(`Here is your new Reservation details ${editRes} `)
-})
+}
 
-router.delete("/:customerId/restaurants/:restaurantId/reservations/:reservationId", async (req, res) => {
+export const cancelReservation = async (req, res) => {
     const reserveId = req.params.reservationId
     const cancelReservation = await Reservation.findByIdAndUpdate(reserveId, { isAvailable: true }
     )
@@ -44,9 +44,8 @@ router.delete("/:customerId/restaurants/:restaurantId/reservations/:reservationI
     await cust.save()
     res.status(200).json(cust)
     res.send(`This is your updated reservation ${cancelReservation}`)
-})
-
-router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId", async (req, res) => {
+}
+export const makeReservation = async (req, res) => {
     const custId = req.params.customerId //found customerId from url
 
     const resId = req.params.reservationId // found reservation from url
@@ -65,9 +64,8 @@ router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId",
     res.status(200).json(customer)
     res.send(`These are your new reservations ${customer}`)
     /* ------------------------------------Issue: Adding reservation twice to my reservations --------------------------------------*/
-})
-
-router.put("/:customerId/restaurants/:restaurantId/favorites", async (req, res) => {
+}
+export const favRestaurant = async (req, res) => {
     const custId = req.params.customerId
     const restId = req.params.restaurantId
     const customer = await Customer.findById(custId)
@@ -76,12 +74,10 @@ router.put("/:customerId/restaurants/:restaurantId/favorites", async (req, res) 
     await customer.populate('favorites')
     res.status(200).json(customer)
     res.send(`This is your favorite Restaurants ${restId}`)
-})
-
+}
+ 
 
 /*-----------------------------------------Issue: make adding a reservation once per restaurantId------------------------------------------*/
 
 
-export default router
-
-
+ 

@@ -7,7 +7,7 @@ import chalk from "chalk";
 import cors from "cors"
 
 // customerRouter below
-import customerRouter from "./controllers/customer.js"
+import customerRouter from "./routes/customer.js"
 import authRouter from "./controllers/regularAuth.js"
 
 // restaurantRouter below
