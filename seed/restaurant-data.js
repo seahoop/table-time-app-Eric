@@ -127,4 +127,3 @@ const insertData = async () => {
 
 insertData()
 
-export default Restaurant

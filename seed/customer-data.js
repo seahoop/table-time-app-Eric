@@ -77,4 +77,3 @@ const insertData = async () => {
 }
 insertData();
 
-export default Customer;
