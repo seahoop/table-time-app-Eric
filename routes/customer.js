@@ -10,7 +10,7 @@ router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId/e
 
 router.delete("/:customerId/restaurants/:restaurantId/reservations/:reservationId", customerCtrls.cancelReservation)
 
-router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId", customerCtrls.makeReservation)
+router.put("/:customerId/restaurants/:restaurantId/reservations/new", customerCtrls.makeReservation)
 
 router.put("/:customerId/restaurants/:restaurantId/favorites", customerCtrls.favRestaurant)
 
