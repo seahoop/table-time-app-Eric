@@ -12,7 +12,7 @@ import customerRouter from "./routes/customer.js"
 import authRouter from "./controllers/regularAuth.js"
 
 // restaurantRouter below
-import restRouter from "./controllers/restaurant.js"
+import restRouter from "./routes/restaurant.js"
 
 // adminRouter below
 import adminAuthRouter from './controllers/adminAuth.js';  // Correct import

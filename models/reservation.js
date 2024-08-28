@@ -18,6 +18,10 @@ const reservationSchema = new Schema({
     isAvailable: {
         type: Boolean,
         default: true
+    },
+    location: {
+        type: String,
+        required: true
     }
 })
 
