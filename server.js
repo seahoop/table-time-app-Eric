@@ -18,6 +18,7 @@ import adminAuthRouter from './controllers/adminAuth.js';  // Correct import
 import adminProfileRouter from './controllers/adminProfile.js';
 import adminPanel from './controllers/adminManagement.js';
 import customerManagement from './controllers/adminManagement.js';
+import restaurantManagement from './controllers/adminManagement.js';
 
 const PORT = 3000
 app.use(cors());
@@ -39,6 +40,7 @@ app.use('/adminAuth', adminAuthRouter);  // Correctly register the route
 app.use('/profiles', adminProfileRouter);
 app.use('/panel', adminPanel );
 app.use('/panel/customerManagement', customerManagement);
+app.use('/panel/restaurantManagement', restaurantManagement);
 
 db.on("connected", () => {
     console.clear();
