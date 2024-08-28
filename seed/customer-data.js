@@ -5,12 +5,6 @@ import dotenv from "dotenv"
 import express from "express"
 const app = express()
 
-mongoose.connect(process.env.MONGODB_URI)
-
-app.listen(3000, () => {
-    console.log('listening on port 3000')
-})
-
 const insertData = async () => {
     // await db.dropDatabase();
 
@@ -81,5 +75,5 @@ const insertData = async () => {
 
     db.close()
 }
+insertData();
 
-insertData()

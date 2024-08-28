@@ -126,3 +126,4 @@ const insertData = async () => {
 }
 
 insertData()
+
