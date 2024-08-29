@@ -30,6 +30,10 @@ mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true
 });
 
+app.get('/*', async (req, res) => {
+  res.json(`Please start.`)
+})
+
 // authorization middleware below
 app.use('/auth', authRouter)
 

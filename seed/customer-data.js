@@ -6,7 +6,6 @@ import express from "express"
 const app = express()
 
 const insertData = async () => {
-    // await db.dropDatabase();
 
     const user1 = new Customer({
         username: "jaxonSmith",
