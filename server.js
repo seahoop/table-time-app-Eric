@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true
 });
 
-app.get('/*', async (req, res) => {
+app.get('/', async (req, res) => {
   res.json(`Please start.`)
 })
 
