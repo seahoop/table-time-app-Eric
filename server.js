@@ -13,7 +13,7 @@ import authRouter from "./controllers/regularAuth.js"
 
 // restaurantRouter below
 import restRouter from "./routes/restaurant.js"
-import Restaurant from "./models/restaurant.js"
+import indexRouter from "./routes/index.js"
 
 // adminRouter below
 import adminAuthRouter from './controllers/adminAuth.js';  // Correct import
@@ -27,14 +27,11 @@ app.use(express.json());  // Middleware to parse JSON bodies
 app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
-app.get('/', async (req, res) => {
-    const allRestaurants = await Restaurant.find({})
-  res.json(allRestaurants)
-})
+app.get('/', indexRouter)
 
 // authorization middleware below
 app.use('/auth', authRouter)
@@ -48,15 +45,15 @@ app.use("/restaurants", restRouter)
 // admin middleware below
 app.use('/adminAuth', adminAuthRouter);  // Correctly register the route
 app.use('/profiles', adminProfileRouter);
-app.use('/panel', adminPanel );
+app.use('/panel', adminPanel);
 app.use('/panel/customerManagement', customerManagement);
 app.use('/panel/restaurantManagement', restaurantManagement);
 
 db.on("connected", () => {
-    console.clear();
-    console.log(chalk.blue("Connected to MongoDB!"));
-  
-    app.listen(PORT, () => {
-      console.log(`Express server running on port: ${PORT}`);
-    });
-  }) 
+  console.clear();
+  console.log(chalk.blue("Connected to MongoDB!"));
+
+  app.listen(PORT, () => {
+    console.log(`Express server running on port: ${PORT}`);
+  });
+}) 
