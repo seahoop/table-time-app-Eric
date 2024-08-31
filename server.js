@@ -13,6 +13,7 @@ import authRouter from "./controllers/regularAuth.js"
 
 // restaurantRouter below
 import restRouter from "./routes/restaurant.js"
+import Restaurant from "./models/restaurant.js"
 
 // adminRouter below
 import adminAuthRouter from './controllers/adminAuth.js';  // Correct import
@@ -31,7 +32,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 app.get('/', async (req, res) => {
-  res.json(`Please start.`)
+    const allRestaurants = await Restaurant.find({})
+  res.json(allRestaurants)
 })
 
 // authorization middleware below
