@@ -22,8 +22,8 @@ import customerManagement from './controllers/adminManagement.js';
 import restaurantManagement from './controllers/adminManagement.js';
 
 const PORT = process.env.PORT || 3000
-app.use(cors());
 app.use(express.json());  // Middleware to parse JSON bodies
+app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
