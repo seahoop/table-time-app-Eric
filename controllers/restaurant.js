@@ -26,7 +26,7 @@ export const newReservation = async (req, res) => {
     restaurant.reservations.push(newReservation._id)
     await restaurant.save()
     await restaurant.populate('reservations')
-    res.status(200).json(restaurant)
+    res.status(201).json(restaurant)
 }
 
 export const editReservation = async (req, res) => {
@@ -56,4 +56,9 @@ export const deleteReservation = async (req, res) => {
     await restaurant.populate('reservations')
     await Reservation.findByIdAndDelete(reservationId)
     res.status(200).json(restaurant)
+}
+
+export const index = async (req, res) => {
+    const allRestaurants = await Restaurant.find({})
+    res.status(200).json(allRestaurants)
 }
