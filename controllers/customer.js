@@ -59,13 +59,13 @@ export const cancelReservation = async (req, res) => {
 
 export const makeReservation = async (req, res) => {
     const custId = req.params.customerId //found customerId from url
+    const reservationId = req.params.reservationId
     const customer = await Customer.findById(custId) // founnd customer using customer Id
-    const newRes = await Reservation.create(req.body)
-    customer.myReservations.push(newRes._id) // push resId to the customer (used push method because myReservation is an array)
+    customer.myReservations.push(reservationId) // push resId to the customer (used push method because myReservation is an array)
     await customer.save()
     await customer.populate('myReservations'),
-        await customer.populate('favorites'),
-        await customer.populate('pastReservations')
+    await customer.populate('favorites'),
+    await customer.populate('pastReservations')
     res.status(200).json(customer)
 }
 
