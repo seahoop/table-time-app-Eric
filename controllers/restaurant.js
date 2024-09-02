@@ -3,7 +3,7 @@ import Reservation from "../models/reservation.js"
 
 export const showRestaurantDashboard = async (req, res) => {
     const restaurant = await Restaurant.findById(req.params.restaurantId).populate('reservations')
-    res.status(200).json({ restaurant })
+    res.status(200).json(restaurant)
 }
 
 export const editRestaurantDashboard = async (req, res) => {
