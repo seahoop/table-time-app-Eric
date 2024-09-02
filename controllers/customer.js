@@ -13,8 +13,24 @@ export const showDashboard = async (req, res) => {
 
 export const showRestaurant = async (req, res) => {
     const resId = req.params.restaurantId
-    const restaurant = await Restaurant.findById(resId)
-    res.status(200).json(restaurant)
+    const restaurant = await Restaurant.findById(resId).populate('reservations')
+    const viewRelevantDetails = ({
+        _id,
+        name,
+        about,
+        address,
+        image,
+        reservations
+    }) => ({
+        _id,
+        name,
+        about,
+        address,
+        image,
+        reservations
+    })
+    const restaurantPage = viewRelevantDetails(restaurant)
+    res.status(200).json(restaurantPage)
 }
 
 export const editReservation = async (req, res) => {
