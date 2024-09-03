@@ -6,9 +6,9 @@ router.get("/:customerId", customerCtrls.showDashboard)
 
 router.get("/:customerId/restaurants/:restaurantId", customerCtrls.showRestaurant)
 
-router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId/edit",customerCtrls.editReservation)
+router.put("/:customerId/reservations/:reservationId/edit",customerCtrls.editReservation)
 
-router.delete("/:customerId/restaurants/:restaurantId/reservations/:reservationId", customerCtrls.cancelReservation)
+router.delete("/:customerId/reservations/:reservationId", customerCtrls.cancelReservation)
 
 router.put("/:customerId/restaurants/:restaurantId/reservations/:reservationId", customerCtrls.makeReservation)
 

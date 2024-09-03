@@ -48,12 +48,13 @@ export const cancelReservation = async (req, res) => {
     const reserveId = req.params.reservationId
     const cancelReservation = await Reservation.findByIdAndUpdate(reserveId, { isAvailable: true })
     const custId = req.params.customerId
-    const cust = await Customer.findById(custId)
+    const cust = await Customer.findById(custId).populate('pastReservations').populate('favorites')
     const newReservations = cust.myReservations.filter((reservation) => {
         return reserveId !== reservation._id.toString()
     })
     cust.myReservations = newReservations
     await cust.save()
+    await cust.populate('myReservations')
     res.status(200).json(cust)
 }
 
