@@ -30,7 +30,7 @@ router.post('/customers/signin', async (req, res) => {
     try {
         const customer = await Customer.findOne({ username: req.body.username })
         if (customer && bcrypt.compareSync(req.body.password, customer.password)) {
-            const token = jwt.sign({ username: customer.username, _id: customer._id }, process.env.JWT_SECRET)
+            const token = jwt.sign({ username: customer.username, _id: customer._id, myReservations: customer.myReservations }, process.env.JWT_SECRET)
             res.status(200).json({ token })
         } else {
             res.json({ message: 'Invalid credentials.' })
