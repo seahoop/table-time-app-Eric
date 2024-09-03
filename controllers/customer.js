@@ -7,8 +7,7 @@ import Reservation from "../models/reservation.js"
 export const showDashboard = async (req, res) => {
     const id = req.params.customerId
     const customer = await Customer.findById(id).populate('favorites').populate('myReservations').populate('pastReservations')
-    const restaurants = await Restaurant.find({})
-    res.status(200).json({ customer, restaurants })
+    res.status(200).json(customer)
 }
 
 export const showRestaurant = async (req, res) => {
